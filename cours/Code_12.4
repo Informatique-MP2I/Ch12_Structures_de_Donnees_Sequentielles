@@ -1,0 +1,20 @@
+SRC := Grimaud_stack
+LIB := stack
+CFLAGS := -Wall -O2
+IMPL := stack_array
+
+.PHONY: clean all
+
+all: $(IMPL)
+
+$(IMPL): $(SRC).o $(IMPL).o $(LIB).h
+	gcc $(CFLAGS) -o $@ $< $(IMPL).o 
+
+$(IMPL).o: $(IMPL).c $(LIB).h
+	gcc $(CFLAGS) -c $< -o $@
+
+$(SRC).o: $(SRC).c $(LIB).h
+	gcc $(CFLAGS) -c $< -o $@
+
+clean:
+        rm $(SRC).o $(IMPL).o $(IMPL)
